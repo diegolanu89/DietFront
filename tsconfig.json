@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "types": ["msw", "vitest/globals", "@testing-library/jest-dom"],
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["cypress/**/*.ts", "src/**/*", "tests", "src"]
+}

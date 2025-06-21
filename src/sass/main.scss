@@ -1,0 +1,25 @@
+// src/styles/main.scss
+
+// 🎨 Estilos base del body de la aplicación
+// Contiene el reset, estructura base del layout y reglas globales
+@use "_body";
+
+// 🔤 Fuentes tipográficas personalizadas
+// Define la familia de fuentes a utilizar y sus variantes
+@use "_fonts";
+
+// 🎞️ Animaciones globales reutilizables
+// Incluye keyframes y transiciones comunes aplicadas en distintos componentes
+@use "_animations";
+
+// ⏳ Estilos del componente de carga (spinners, barras, etc.)
+// Incluye el diseño visual de indicadores de loading
+@use "_loading";
+
+// ✨ Estilo efecto "glassmorphism" para tarjetas y contenedores
+// Proporciona clases con efecto de fondo difuminado y transparencia
+@use "_glass";
+
+// 🚀 Texto animado de la pantalla de inicio o bienvenida
+// Estilos particulares del componente Start / Starting
+@use "_textStart";

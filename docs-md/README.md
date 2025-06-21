@@ -1,0 +1,47 @@
+**frontapp**
+
+***
+
+# frontapp
+
+## Modules
+
+- [App](App/README.md)
+- [components/FooterComponents/FooterFixed](components/FooterComponents/FooterFixed/README.md)
+- [components/FooterComponents/FooterFixed.test](components/FooterComponents/FooterFixed.test/README.md)
+- [components/FuncionalComponents/Loading](components/FuncionalComponents/Loading/README.md)
+- [components/FuncionalComponents/Loading.test](components/FuncionalComponents/Loading.test/README.md)
+- [components/FuncionalComponents/ProtectedRoute](components/FuncionalComponents/ProtectedRoute/README.md)
+- [components/FuncionalComponents/ProtectedRoute.test](components/FuncionalComponents/ProtectedRoute.test/README.md)
+- [components/FuncionalComponents/Starting](components/FuncionalComponents/Starting/README.md)
+- [components/FuncionalComponents/Starting.test](components/FuncionalComponents/Starting.test/README.md)
+- [components/FuncionalComponents/ThemedLinearProgress](components/FuncionalComponents/ThemedLinearProgress/README.md)
+- [components/FuncionalComponents/ThemedLinearProgress.test](components/FuncionalComponents/ThemedLinearProgress.test/README.md)
+- [components/HeaderComponents/AppBar](components/HeaderComponents/AppBar/README.md)
+- [components/HeaderComponents/AppBar.test](components/HeaderComponents/AppBar.test/README.md)
+- [components/HelloWorld](components/HelloWorld/README.md)
+- [components/HelloWorld.test](components/HelloWorld.test/README.md)
+- [components/MainComponents/RedirectHome](components/MainComponents/RedirectHome/README.md)
+- [components/MainComponents/RedirectHome.test](components/MainComponents/RedirectHome.test/README.md)
+- [config/parameters](config/parameters/README.md)
+- [contexts/Login.Context](contexts/Login.Context/README.md)
+- [contexts/Style.Context](contexts/Style.Context/README.md)
+- [controllers/Login/HandlerSubmit](controllers/Login/HandlerSubmit/README.md)
+- [controllers/Login/Login](controllers/Login/Login/README.md)
+- [controllers/Login/LoginAdapter](controllers/Login/LoginAdapter/README.md)
+- [controllers/Login/LoginFirebase](controllers/Login/LoginFirebase/README.md)
+- [controllers/Login/LoginInterface](controllers/Login/LoginInterface/README.md)
+- [controllers/Login/LoginMock](controllers/Login/LoginMock/README.md)
+- [controllers/Login/LoginMongo](controllers/Login/LoginMongo/README.md)
+- [controllers/Login/LoginMongoAtlas](controllers/Login/LoginMongoAtlas/README.md)
+- [controllers/Login/LoginValidators](controllers/Login/LoginValidators/README.md)
+- [main](main/README.md)
+- [mocks/browser](mocks/browser/README.md)
+- [mocks/handlers](mocks/handlers/README.md)
+- [services/ApiService](services/ApiService/README.md)
+- [setupTests](setupTests/README.md)
+- [types/User](types/User/README.md)
+- [utils/math](utils/math/README.md)
+- [utils/math.test](utils/math.test/README.md)
+- [utils/Utils](utils/Utils/README.md)
+- [vite-env](vite-env/README.md)
