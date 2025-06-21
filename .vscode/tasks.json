@@ -1,0 +1,74 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "bash",
+			"args": ["-c", "source $HOME/.nvm/nvm.sh && nvm use 22 && yarn dev"],
+			"problemMatcher": [],
+			"detail": "Inicia el servidor de desarrollo.",
+			"label": "ReactApp",
+			"options": {
+				"env": {
+					"BROWSER": "none"
+				}
+			},
+			"icon": {
+				"color": "terminal.ansiYellow"
+			}
+		},
+		{
+			"label": "Sass",
+			"type": "shell",
+			"command": "bash",
+			"args": ["-c", "source $HOME/.nvm/nvm.sh && nvm use 22 && yarn sass"],
+			"problemMatcher": [],
+			"detail": "Observa cambios en archivos SCSS y genera CSS.",
+			"icon": {
+				"color": "terminal.ansiRed"
+			}
+		},
+		{
+			"label": "Cypress",
+			"type": "shell",
+			"command": "bash",
+			"args": ["-c", "source $HOME/.nvm/nvm.sh && nvm use 22 && yarn cypress:open"],
+			"problemMatcher": [],
+			"detail": "Ejecuta Cypress en modo interactivo para pruebas E2E.",
+			"icon": {
+				"color": "terminal.ansiGreen"
+			}
+		},
+		{
+			"label": "Vitest",
+			"type": "shell",
+			"command": "bash",
+			"args": ["-c", "source $HOME/.nvm/nvm.sh && nvm use 22 && yarn test"],
+			"problemMatcher": [],
+			"detail": "Ejecuta las pruebas unitarias con Vitest.",
+			"icon": {
+				"color": "terminal.ansiBlue"
+			}
+		},
+		{
+			"label": "Coverage",
+			"type": "shell",
+			"command": "bash",
+			"args": ["-c", "source $HOME/.nvm/nvm.sh && nvm use 22 && yarn test:coverage"],
+			"problemMatcher": [],
+			"detail": "Ejecuta las pruebas con Vitest y genera el reporte de cobertura.",
+			"icon": {
+				"color": "terminal.ansiCyan"
+			}
+		},
+		{
+			"label": "Development",
+			"dependsOn": ["ReactApp", "Sass", "Cypress", "Vitest"],
+			"problemMatcher": [],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}
+		}
+	]
+}
