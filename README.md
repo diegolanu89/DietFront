@@ -46,3 +46,19 @@ yarn test:coverage
 yarn preview & yarn cypress:run
 
 ````
+
+---
+
+## 📚 Documentación Completa
+
+> Encontrá la guía detallada del proyecto en la siguiente URL:
+
+🔗 [https://diegolanu89.github.io/DietFront/](https://diegolanu89.github.io/DietFront/)
+
+Incluye:
+
+- Estructura del proyecto
+- Configuración del entorno
+- Componentes clave y rutas
+- Estrategias de autenticación
+- Testing y despliegue
