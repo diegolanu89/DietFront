@@ -29,42 +29,57 @@ import { ThemeProvider } from "@mui/material/styles";
 
 // Normaliza estilos
 import CssBaseline from "@mui/material/CssBaseline";
+import {useSocketDataContext} from "./contexts/Socket.Context"
+import { useEffect } from "react";
 
 /**
  * Componente principal de la aplicación para clientes.
  * Encapsula el enrutamiento, la autenticación y la estructura visual.
  */
 const AppClient = () => {
+  const { setSocketData } = useSocketDataContext();
+
+  useEffect(() => {
+
+    const ws = new WebSocket("ws://localhost:8081/ws");
+
+    ws.onmessage = (e) => {
+      const data = e.data;
+      setSocketData(data);
+    }
+
+  }, []);
+ 
   return (
     <>
       <ThemeProvider theme={styleDark}>
         <CssBaseline />
         {/* Proveedor global de autenticación para toda la aplicación */}
-        <AuthProvider>
-          {/* Contenedor principal de MUI que envuelve todo el contenido */}
-          <Box>
-            {/* Router para manejo de rutas en el navegador */}
-            <BrowserRouter>
-              {/* Barra de navegación superior persistente */}
-              <AppBarHeader />
+          <AuthProvider>
+            {/* Contenedor principal de MUI que envuelve todo el contenido */}
+            <Box>
+              {/* Router para manejo de rutas en el navegador */}
+              <BrowserRouter>
+                {/* Barra de navegación superior persistente */}
+                <AppBarHeader />
 
-              {/* Definición de las rutas de la app */}
-              <Routes>
-                {/* Ruta raíz: redirige al home o login según el usuario esté autenticado */}
-                <Route path="/" element={<RedirectHome />} />
+                {/* Definición de las rutas de la app */}
+                <Routes>
+                  {/* Ruta raíz: redirige al home o login según el usuario esté autenticado */}
+                  <Route path="/" element={<RedirectHome />} />
 
-                {/* Ruta pública para iniciar sesión */}
-                <Route path={PATHS.LOGIN} element={<Login />} />
+                  {/* Ruta pública para iniciar sesión */}
+                  <Route path={PATHS.LOGIN} element={<Login />} />
 
-                {/* Rutas protegidas: solo accesibles si el usuario está logueado */}
-                <Route element={<ProtectedRoute />}>
-                  {/* Ruta al HOME real (contenido principal) */}
-                  <Route path={PATHS.HOME} element={<div>HOLA</div>} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </Box>
-        </AuthProvider>
+                  {/* Rutas protegidas: solo accesibles si el usuario está logueado */}
+                  <Route element={<ProtectedRoute />}>
+                    {/* Ruta al HOME real (contenido principal) */}
+                    <Route path={PATHS.HOME} element={<div>HOLA</div>} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </Box>
+          </AuthProvider>
       </ThemeProvider>
     </>
   );

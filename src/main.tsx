@@ -4,6 +4,9 @@ import ReactDOM from "react-dom/client";
 // Importa el componente raíz de la aplicación
 import App from "./App";
 
+import { SocketDataProvider} from "./contexts/Socket.Context"
+
+
 // Importa los estilos globales CSS de la app (colores, tipografías, layouts generales)
 import "./css/appStyle.css";
 
@@ -11,6 +14,8 @@ import "./css/appStyle.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     {/* Renderiza el componente principal App dentro del DOM */}
-    <App />
+    <SocketDataProvider>
+      <App />
+    </SocketDataProvider>
   </>
 );

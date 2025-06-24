@@ -1,6 +1,6 @@
 // src/components/Login/Login.tsx
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -17,6 +17,7 @@ import { useAuth } from "../../contexts/Login.Context";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_TEXTS, LOGIN_STYLES } from "../../config/parameters";
 import { useAuthSubmit } from "./HandlerSubmit";
+import { useSocketDataContext } from "../../contexts/Socket.Context";
 
 /**
  * 🧩 Login
@@ -50,7 +51,11 @@ const Login = () => {
   const [isRegistering, setIsRegistering] = useState(
     localStorage.getItem("loginMode") === "register"
   ); // Estado para alternar entre login y registro
+const { socketData } = useSocketDataContext()
 
+ const [socket, setSocket] = useState(""); 
+
+ useEffect(()=>{setSocket(socketData)}, [socketData])
   // 🔁 Hook con la lógica de autenticación centralizada
   const { submit, error, loading } = useAuthSubmit({
     login,
@@ -134,7 +139,11 @@ const Login = () => {
         <Typography variant="h5" align="center" gutterBottom>
           {isRegistering ? LOGIN_TEXTS.REGISTER_TITLE : LOGIN_TEXTS.TITLE}
         </Typography>
-
+    {socket && (
+              <Alert severity="error" sx={{ mt: 2 }}>
+                {"Holuuuuuu "}{socket}
+              </Alert>
+            )}
         {/* 📋 Formulario principal */}
         <form onSubmit={handleSubmit} noValidate>
           <TextField
