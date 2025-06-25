@@ -131,20 +131,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   /**
    * 👁️ Restauración de sesión
    *
-   * Observa el estado de autenticación mediante `authAdapter.onAuthStateChanged`
-   * y sincroniza el estado global del usuario.
+   * Restaura la sesión al montar el proveedor consultando al backend.
+   * Si hay cookie válida, se guarda el usuario activo.
    */
   useEffect(() => {
     const unsubscribe = authAdapter.onAuthStateChanged((activeUser) => {
-      const stored = localStorage.getItem("userData");
-
-      if (stored && activeUser) {
+      if (activeUser) {
         setUser(activeUser);
+        localStorage.setItem("userData", JSON.stringify(activeUser));
       } else {
         localStorage.removeItem("userData");
         setUser(null);
       }
-
       setLoading(false);
     });
 

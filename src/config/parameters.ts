@@ -94,7 +94,8 @@ export const AUTH_CONFIG_ATLAS = {
 };
 
 export const AUTH_CONFIG_MONGO = {
-  BASE_URL: import.meta.env.VITE_API_URL || "http://localhost:3000/api", // se adapta al entorno
+  BASE_URL:
+    import.meta.env.VITE_API_URL + "/auth" || "http://localhost:8080/auth", // se adapta al entorno
   LOGIN_PATH: "/login",
   LOGOUT_PATH: "/logout",
   REGISTER_PATH: "/register", // ← Agregado

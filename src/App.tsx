@@ -29,6 +29,8 @@ import { ThemeProvider } from "@mui/material/styles";
 
 // Normaliza estilos
 import CssBaseline from "@mui/material/CssBaseline";
+//DERIVA A UNA PAGINA INEXISTENTE
+import NotFound from "./components/FuncionalComponents/NotFound";
 
 /**
  * Componente principal de la aplicación para clientes.
@@ -61,6 +63,7 @@ const AppClient = () => {
                   {/* Ruta al HOME real (contenido principal) */}
                   <Route path={PATHS.HOME} element={<div>HOLA</div>} />
                 </Route>
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
           </Box>

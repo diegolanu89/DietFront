@@ -35,6 +35,7 @@ export class LoginMongo implements LoginInterface<AppUser> {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include",
       }
     );
 
@@ -66,40 +67,56 @@ export class LoginMongo implements LoginInterface<AppUser> {
     await fetch(
       `${AUTH_CONFIG_MONGO.BASE_URL}${AUTH_CONFIG_MONGO.LOGOUT_PATH}`,
       {
-        method: "POST",
+        method: "GET",
+        credentials: "include",
       }
     );
   }
 
   /**
    * 👁️ onAuthStateChanged
+   * Observa el estado actual de autenticación realizando una consulta a `/perfil`.
+   * Si la cookie de sesión es válida, devuelve el usuario activo.
    *
-   * Simula la observación del estado de sesión leyendo desde `localStorage`.
-   * Este método es útil para restaurar sesiones al recargar la aplicación,
-   * aunque no mantiene una conexión activa con el backend.
-   *
-   * @param callback - Función que se ejecuta con el usuario activo (`AppUser`)
-   *                   o `null` si no hay sesión.
-   * @returns Una función vacía para cumplir con el contrato de `LoginInterface`.
+   * @param callback - Función que recibe el usuario activo o `null` si no hay sesión
+   * @returns Una función vacía (no hay subscripción real)
    *
    * @example
-   * authAdapter.onAuthStateChanged((user) => {
-   *   if (user) console.log("Usuario activo:", user.email);
+   * ```ts
+   * adapter.onAuthStateChanged((user) => {
+   *   if (user) console.log("Sesión activa", user.email);
    * });
+   * ```
    */
   onAuthStateChanged(callback: (user: AppUser | null) => void): () => void {
-    const stored = localStorage.getItem("userDataAdmin");
-    if (stored) {
+    const fetchSession = async () => {
       try {
-        const parsed = JSON.parse(stored) as AppUser;
-        callback(parsed);
+        const res = await fetch(`${AUTH_CONFIG_MONGO.BASE_URL}/perfil`, {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          callback(null);
+          return;
+        }
+
+        const data = await res.json();
+
+        const user: AppUser = {
+          id: data.usuario.id,
+          nombre: data.usuario.nombre,
+          email: data.usuario.email,
+        };
+
+        callback(user);
       } catch {
         callback(null);
       }
-    } else {
-      callback(null);
-    }
+    };
 
+    fetchSession();
+
+    // No hay suscripción real, solo simulamos una devolución
     return () => {};
   }
 
@@ -132,6 +149,7 @@ export class LoginMongo implements LoginInterface<AppUser> {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, nombre }),
+        credentials: "include",
       }
     );
 
