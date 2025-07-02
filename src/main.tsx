@@ -7,10 +7,15 @@ import App from "./App";
 // Importa los estilos globales CSS de la app (colores, tipografías, layouts generales)
 import "./css/appStyle.css";
 
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 // Crea la raíz de la aplicación React vinculándola al elemento HTML con id "root"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     {/* Renderiza el componente principal App dentro del DOM */}
-    <App />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <App />
+    </LocalizationProvider>
   </>
 );

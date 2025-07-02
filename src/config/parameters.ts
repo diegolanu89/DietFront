@@ -1,9 +1,10 @@
 // 📌 Rutas principales utilizadas en la aplicación
 export const PATHS = {
-  HOME: "/", // Página de inicio
+  HOME: "/home", // Página de inicio
   INFO: "/info", // Página informativa
   LOGIN: "/login", // Página de login
   REGISTER: "/register", // Página de registro de usuario (si se implementa)
+  ALL_DIET: "/todasLasDietas",
 };
 
 // ⚙️ Configuración para el componente AppBarHeader
@@ -123,4 +124,20 @@ export const LOGIN_MESSAGES = {
 
 export const RECAPTCHA_KEYS = {
   SITE_KEY: "6LffC2krAAAAANdUq0hIpw5rjdrUux9rrSMY33FL", // reemplazá por tu clave pública de Google reCAPTCHA v2 invisible
+};
+
+export const DIET_CONFIG_MONGO = {
+  BASE_URL: import.meta.env.VITE_API_URL + "/api/diet",
+  ALL: "", // GET /api/diet
+  MINE: "/mis-dietas", // GET /api/diet/mis-dietas
+  BY_ID: "", // para usar manualmente /:id
+  BASE: "", // POST en /api/diet
+  ERRORS: {
+    FETCH_ALL: "No se pudieron obtener las dietas públicas.",
+    FETCH_OWN: "No se pudieron obtener tus dietas.",
+    FETCH_ONE: "No se pudo obtener la dieta solicitada.",
+    CREATE: "No se pudo crear la dieta.",
+    UPDATE: "No se pudo actualizar la dieta.",
+    DELETE: "No se pudo eliminar la dieta.",
+  },
 };

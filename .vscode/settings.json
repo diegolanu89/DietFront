@@ -1,41 +1,41 @@
 {
-	//MAC
-	"terminal.integrated.defaultProfile.osx": "zsh",
+  //MAC
+  "terminal.integrated.defaultProfile.osx": "zsh",
 
-	// Formateador predeterminado
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Formateador predeterminado
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-	// Formatear automáticamente al guardar
-	"editor.formatOnSave": true,
+  // Formatear automáticamente al guardar
+  "editor.formatOnSave": true,
 
-	// Habilitar formateo en JavaScript y TypeScript
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+  // Habilitar formateo en JavaScript y TypeScript
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
-	// Excluir archivos innecesarios del buscador
-	"files.exclude": {
-		"node_modules": true,
-		"dist": true
-	},
+  // Excluir archivos innecesarios del buscador
+  "files.exclude": {
+    "node_modules": true,
+    "dist": true
+  },
 
-	// Ignorar archivos grandes para mejorar el rendimiento
-	"files.watcherExclude": {
-		"**/node_modules/**": true,
-		"**/dist/**": true
-	},
+  // Ignorar archivos grandes para mejorar el rendimiento
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true
+  },
 
-	"material-icon-theme.folders.associations": {
-		"aditional": "client",
-		"supervisor": "client",
-		"deviceController": "lib",
-		"soap": "mock",
-		"simulator": "controller"
-	},
-	/*"material-icon-theme.files.customClones": [
+  "material-icon-theme.folders.associations": {
+    "aditional": "client",
+    "supervisor": "client",
+    "deviceController": "lib",
+    "soap": "mock",
+    "simulator": "controller"
+  },
+  /*"material-icon-theme.files.customClones": [
 		{
 			"name": "context",
 			"base": "react",
@@ -73,12 +73,13 @@
 			"fileNames": ["react.rs"]
 		}
 	],*/
-	"material-icon-theme.files.associations": {
-		"*.Context.tsx": "context",
-		"*.Controller.ts": "devicecontroller",
-		"*.c.tsx": "controller",
-		"*.Screen.tsx": "view",
-		"*.m.ts": "model",
-		"*.h.tsx": "hooks"
-	}
+  "material-icon-theme.files.associations": {
+    "*.Context.tsx": "context",
+    "*.Controller.ts": "devicecontroller",
+    "*.c.tsx": "controller",
+    "*.Screen.tsx": "view",
+    "*.m.ts": "model",
+    "*.h.tsx": "hooks"
+  },
+  "liveServer.settings.port": 5501
 }
