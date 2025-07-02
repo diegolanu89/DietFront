@@ -1,73 +1,41 @@
-import { Diet } from "../../types/Diet";
+// src/services/diet/DietAdapterFactory.ts
+
 import { DietInterface } from "./DietInterface";
+import { DietMock } from "./DietMock";
 import { DietMongo } from "./DietMongo";
 
+// Se definen los posibles valores esperados desde la variable de entorno
+type DietProvider = "mongo" | "mock";
+
 /**
- * 🔌 DietAdapter
+ * 🏭 DietAdapterFactory
  *
- * Adaptador que cumple con `DietInterface` y utiliza una implementación concreta
- * como `DietMongo`. Facilita el desacople entre el frontend y la fuente de datos.
- *
- * Esta clase permite intercambiar fácilmente la implementación por otra (Mock, Firebase, etc.)
- * sin modificar el código de los consumidores (Context, Componentes, etc.).
+ * Fábrica de adaptadores para el manejo de dietas.
+ * Permite elegir entre distintos proveedores como Mongo o Mock,
+ * en función de la variable de entorno `VITE_DIET_PROVIDER`.
  */
-export class DietAdapter implements DietInterface {
-  private readonly backend: DietInterface;
+export class DietAdapterFactory {
+  static getAdapter(): DietInterface {
+    const prov = import.meta.env.VITE_DIET_PROVIDER;
+    const provider = (prov as DietProvider) || "mock";
 
-  constructor() {
-    // En este caso, usamos Mongo por defecto
-    this.backend = new DietMongo();
-  }
+    console.warn("DIET PROVIDER SELECTED:", provider);
 
-  /**
-   * 📋 listarTodas
-   *
-   * Lista todas las dietas públicas del sistema.
-   */
-  listarTodas(): Promise<Diet[]> {
-    return this.backend.listarTodas();
-  }
+    switch (provider) {
+      case "mongo":
+        return new DietMongo();
 
-  /**
-   * 🧍 listarPorUsuario
-   *
-   * Lista todas las dietas propias del usuario autenticado.
-   */
-  listarPorUsuario(): Promise<Diet[]> {
-    return this.backend.listarPorUsuario();
-  }
-
-  /**
-   * 🆕 crear
-   *
-   * Crea una nueva dieta asociada al usuario autenticado.
-   *
-   * @param dieta - Datos requeridos para la creación.
-   */
-  crear(dieta: Partial<Diet>): Promise<Diet> {
-    return this.backend.crear(dieta);
-  }
-
-  /**
-   * 📝 actualizar
-   *
-   * Actualiza una dieta propia según el ID.
-   *
-   * @param id - ID de la dieta.
-   * @param dieta - Datos a modificar.
-   */
-  actualizar(id: string, dieta: Partial<Diet>): Promise<Diet> {
-    return this.backend.actualizar(id, dieta);
-  }
-
-  /**
-   * ❌ eliminar
-   *
-   * Elimina una dieta del sistema.
-   *
-   * @param id - ID de la dieta.
-   */
-  eliminar(id: string): Promise<void> {
-    return this.backend.eliminar(id);
+      case "mock":
+      default:
+        return new DietMock();
+    }
   }
 }
+
+/**
+ * 🧩 dietAdapter
+ *
+ * Adaptador de dietas utilizado en toda la aplicación.
+ * La implementación concreta es seleccionada dinámicamente por la fábrica.
+ */
+export const dietAdapter: DietInterface = DietAdapterFactory.getAdapter();
