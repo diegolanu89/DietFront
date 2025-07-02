@@ -1,4 +1,9 @@
-// src/components/dietas/AddDietaForm.tsx
+/**
+ * @file AddDietaForm.tsx
+ * @description Componente de formulario reutilizable para crear o editar una dieta.
+ * Se conecta con el `DietContext` para persistir los cambios. Permite ingresar nombre,
+ * fecha de inicio, fecha de fin y calorías totales. Utiliza `DatePicker` de MUI.
+ */
 
 import { useState, useEffect } from "react";
 import {
@@ -14,28 +19,48 @@ import { useDietContext } from "../../contexts/Diet.Context";
 import { Diet } from "../../types/Diet";
 import dayjs, { Dayjs } from "dayjs";
 
+/**
+ * Props aceptadas por el componente `AddDietaForm`.
+ *
+ * @property onClose - Función opcional que se ejecuta al cerrar el formulario (por ejemplo, cerrar un modal).
+ * @property initialData - Dieta opcional que se desea editar. Si no se pasa, se asume creación.
+ */
 type Props = {
   onClose?: () => void;
   initialData?: Diet;
 };
 
 /**
- * 📋 AddDietaForm
+ * `AddDietaForm`
  *
- * Formulario para crear o editar una dieta.
- * Si se proporciona `initialData`, el formulario funcionará en modo edición.
+ * Formulario para crear una nueva dieta o editar una dieta existente.
+ * Si se pasa `initialData`, el formulario precarga los campos y opera en modo edición.
+ *
+ * @component
+ * @example
+ * <AddDietaForm onClose={handleClose} />
+ * <AddDietaForm initialData={dietaSeleccionada} onClose={handleClose} />
+ *
+ * @param {Props} props - Propiedades que controlan el modo de operación del formulario.
+ * @returns {JSX.Element} Formulario interactivo para gestión de dietas.
  */
-const AddDietaForm = ({ onClose, initialData }: Props) => {
+const AddDietaForm = ({ onClose, initialData }: Props): JSX.Element => {
   const { crearDieta, actualizarDieta } = useDietContext();
 
-  const [nombre, setNombre] = useState("");
+  const [nombre, setNombre] = useState<string>("");
   const [fechaInicio, setFechaInicio] = useState<Dayjs | null>(dayjs());
   const [fechaFin, setFechaFin] = useState<Dayjs | null>(null);
-  const [calorias, setCalorias] = useState("");
+  const [calorias, setCalorias] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Bandera que determina si el formulario está en modo edición.
+   */
   const esEdicion = Boolean(initialData);
 
+  /**
+   * Efecto que carga los datos iniciales en el formulario si se está editando.
+   */
   useEffect(() => {
     if (initialData) {
       setNombre(initialData.nombre || "");
@@ -47,6 +72,13 @@ const AddDietaForm = ({ onClose, initialData }: Props) => {
     }
   }, [initialData]);
 
+  /**
+   * Maneja el envío del formulario para crear o actualizar una dieta.
+   * Valida los campos requeridos y ejecuta las funciones correspondientes del contexto.
+   * En caso de éxito, ejecuta `onClose()` si fue provisto.
+   *
+   * @param {React.FormEvent} e - Evento del formulario.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);

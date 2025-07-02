@@ -1,3 +1,9 @@
+/**
+ * @file TodasLasDietas.tsx
+ * @description Página que muestra todas las dietas públicas disponibles.
+ * Se conecta al contexto de dietas y utiliza paginación para mostrar los resultados.
+ */
+
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, Fab } from "@mui/material";
 import { Diet } from "../../types/Diet";
@@ -6,12 +12,23 @@ import DietaCardPublica from "./DietCardPublica";
 
 const DIETAS_POR_PAGINA = 6;
 
-const TodasLasDietas = () => {
-  const { listarTodas } = useDietContext();
+/**
+ * `TodasLasDietas`
+ *
+ * Componente que renderiza una grilla paginada con las dietas públicas disponibles.
+ * Realiza una consulta inicial al cargar el componente mediante el método `listarTodas` del contexto.
+ * Utiliza `DietaCardPublica` para mostrar cada tarjeta.
+ *
+ * @component
+ * @returns {JSX.Element} Contenedor con grilla de dietas públicas y paginación.
+ */
+const TodasLasDietas = (): JSX.Element => {
+  const { listarTodas } = useDietContext(); // Función para obtener dietas públicas
   const [loading, setLoading] = useState(true);
   const [dietas, setDietas] = useState<Diet[]>([]);
   const [pagina, setPagina] = useState(1);
 
+  // Efecto inicial para cargar las dietas públicas
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -40,6 +57,7 @@ const TodasLasDietas = () => {
     );
   }
 
+  // Paginación de las dietas
   const desde = (pagina - 1) * DIETAS_POR_PAGINA;
   const hasta = desde + DIETAS_POR_PAGINA;
   const dietasPaginadas = dietas.slice(desde, hasta);

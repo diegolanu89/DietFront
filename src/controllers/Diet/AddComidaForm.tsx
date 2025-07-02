@@ -1,3 +1,10 @@
+/**
+ * @file AddComidasForm.tsx
+ * @description Componente de formulario para agregar una comida a una dieta específica.
+ * Permite seleccionar el día, tipo de comida, nombre y cantidad de calorías, y actualiza
+ * el menú semanal de la dieta usando el contexto global `DietContext`.
+ */
+
 import {
   Box,
   Button,
@@ -12,11 +19,19 @@ import { useState } from "react";
 import { Diet, MenuDiario } from "../../types/Diet";
 import { useDietContext } from "../../contexts/Diet.Context";
 
+/**
+ * Propiedades requeridas por el componente `AddComidasForm`.
+ * @property dieta - Dieta a la cual se le agregará la comida.
+ * @property onClose - Función que se ejecuta al cerrar el formulario.
+ */
 type Props = {
   dieta: Diet;
   onClose: () => void;
 };
 
+/**
+ * Lista de días disponibles para seleccionar en el formulario.
+ */
 const diasDeLaSemana = [
   "Lunes",
   "Martes",
@@ -27,18 +42,40 @@ const diasDeLaSemana = [
   "Domingo",
 ];
 
+/**
+ * Tipos de comida válidos que puede seleccionar el usuario.
+ */
 const tiposComida = ["Desayuno", "Almuerzo", "Merienda", "Cena", "Snack"];
 
-const AddComidasForm = ({ dieta, onClose }: Props) => {
+/**
+ * Componente de formulario utilizado para agregar una comida a una dieta existente.
+ * El formulario permite elegir un día de la semana, el nombre de la comida, su tipo
+ * y el valor calórico. Una vez completado, actualiza el menú semanal de la dieta mediante
+ * el contexto global `DietContext`.
+ *
+ * @component
+ * @example
+ * <AddComidasForm dieta={miDieta} onClose={() => setOpen(false)} />
+ *
+ * @param {Props} props - Propiedades con la dieta destino y el handler para cerrar.
+ * @returns {JSX.Element} Formulario renderizado con campos y botón de acción.
+ */
+const AddComidasForm = ({ dieta, onClose }: Props): JSX.Element => {
   const { actualizarDieta } = useDietContext();
+
   const [dia, setDia] = useState<string>("Lunes");
   const [nombre, setNombre] = useState<string>("");
   const [tipo, setTipo] = useState<string>("");
   const [calorias, setCalorias] = useState<number>(0);
 
+  /**
+   * Maneja la acción de agregar una nueva comida.
+   * - Si el día ya existe, agrega la comida a ese día.
+   * - Si no existe, crea un nuevo objeto `MenuDiario` para ese día.
+   * Luego actualiza la dieta con el nuevo `menuSemanal`.
+   */
   const handleAgregar = async () => {
     const nuevoMenu: MenuDiario[] = [...(dieta.menuSemanal || [])];
-
     const nuevaComida = { nombre, tipo, calorias };
 
     const existente = nuevoMenu.find((m) => m.dia === dia);

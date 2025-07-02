@@ -1,3 +1,9 @@
+/**
+ * @file DietaCard.tsx
+ * @description Componente de tarjeta que representa una dieta con opciones de visualización, edición, eliminación y agregado de comidas.
+ * Incluye un modal interno para mostrar los detalles completos de la dieta.
+ */
+
 import {
   Box,
   Typography,
@@ -22,6 +28,14 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 import { useState } from "react";
 import { Diet } from "../../types/Diet";
 
+/**
+ * Props del componente `DietaCard`.
+ *
+ * @property dieta - Objeto de tipo `Diet` que contiene los datos de la dieta.
+ * @property onEdit - Función opcional a ejecutar al presionar el botón de editar.
+ * @property onDelete - Función opcional a ejecutar al presionar el botón de eliminar.
+ * @property onAddComidas - Función opcional a ejecutar al presionar el botón de agregar comidas.
+ */
 type Props = {
   dieta: Diet;
   onEdit?: () => void;
@@ -29,11 +43,36 @@ type Props = {
   onAddComidas?: () => void;
 };
 
-const DietaCard = ({ dieta, onEdit, onDelete, onAddComidas }: Props) => {
+/**
+ * `DietaCard`
+ *
+ * Componente visual que muestra una tarjeta con información breve de una dieta
+ * y botones para acciones asociadas (editar, eliminar, agregar comidas, ver detalles).
+ * Incluye un modal interno que muestra el detalle completo de la dieta seleccionada.
+ *
+ * @component
+ * @example
+ * <DietaCard
+ *   dieta={unaDieta}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   onAddComidas={handleAdd}
+ * />
+ *
+ * @param {Props} props - Propiedades para renderizar y controlar el componente.
+ * @returns {JSX.Element} Tarjeta interactiva con resumen de la dieta y modal de detalle.
+ */
+const DietaCard = ({
+  dieta,
+  onEdit,
+  onDelete,
+  onAddComidas,
+}: Props): JSX.Element => {
   const [openDetalle, setOpenDetalle] = useState(false);
 
   return (
     <>
+      {/* Tarjeta con resumen de la dieta */}
       <Card variant="outlined" sx={{ borderRadius: 2 }}>
         <CardContent>
           <Typography variant="h6">{dieta.nombre}</Typography>
@@ -47,6 +86,7 @@ const DietaCard = ({ dieta, onEdit, onDelete, onAddComidas }: Props) => {
           )}
         </CardContent>
 
+        {/* Acciones */}
         <CardActions>
           {onEdit && (
             <IconButton onClick={onEdit} color="primary">
@@ -69,6 +109,7 @@ const DietaCard = ({ dieta, onEdit, onDelete, onAddComidas }: Props) => {
         </CardActions>
       </Card>
 
+      {/* Modal con detalle completo de la dieta */}
       <Dialog
         open={openDetalle}
         onClose={() => setOpenDetalle(false)}

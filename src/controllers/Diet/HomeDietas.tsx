@@ -1,3 +1,9 @@
+/**
+ * @file HomeDietas.tsx
+ * @description Página principal donde el usuario visualiza, edita, crea o elimina sus dietas personalizadas.
+ * Incluye paginación, drawer lateral o inferior (según dispositivo), y gestión modal de eliminación.
+ */
+
 import { useDietContext } from "../../contexts/Diet.Context";
 import {
   Box,
@@ -20,7 +26,17 @@ import AddComidasForm from "./AddComidaForm";
 
 const DIETAS_POR_PAGINA = 6;
 
-const HomeDietas = () => {
+/**
+ * `HomeDietas`
+ *
+ * Componente principal para visualizar y gestionar las dietas del usuario.
+ * Permite crear nuevas dietas, editarlas, agregar comidas o eliminarlas.
+ * Implementa paginación, soporte responsive con drawer móvil y un modal de confirmación.
+ *
+ * @component
+ * @returns {JSX.Element} Página con grilla de dietas y herramientas de gestión.
+ */
+const HomeDietas = (): JSX.Element => {
   const { dietas, loading, eliminarDieta } = useDietContext();
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
@@ -107,6 +123,7 @@ const HomeDietas = () => {
 
   return (
     <Box mt={2} px={2}>
+      {/* Encabezado con acciones */}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -134,6 +151,7 @@ const HomeDietas = () => {
         </Box>
       </Box>
 
+      {/* Grilla de dietas */}
       <Box
         display="grid"
         gridTemplateColumns={{ xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" }}
@@ -151,6 +169,7 @@ const HomeDietas = () => {
         ))}
       </Box>
 
+      {/* Paginación */}
       {totalPaginas > 1 && (
         <Box mt={3} display="flex" justifyContent="center" gap={1}>
           {Array.from({ length: totalPaginas }, (_, i) => (
@@ -166,6 +185,7 @@ const HomeDietas = () => {
         </Box>
       )}
 
+      {/* Drawer lateral/inferior para formularios */}
       <Drawer
         anchor={isMobile ? "bottom" : "right"}
         open={drawerOpen}
@@ -198,6 +218,7 @@ const HomeDietas = () => {
         </Box>
       </Drawer>
 
+      {/* Botón flotante solo para móviles */}
       {isMobile && (
         <Fab
           color="primary"
@@ -208,6 +229,7 @@ const HomeDietas = () => {
         </Fab>
       )}
 
+      {/* Modal de confirmación para eliminar dieta */}
       <ConfirmDeleteModal
         open={modalOpen}
         onClose={cerrarModalEliminar}
