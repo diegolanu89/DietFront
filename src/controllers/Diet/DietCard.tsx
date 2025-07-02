@@ -97,14 +97,15 @@ const DietaCard = ({ dieta, onEdit, onDelete, onAddComidas }: Props) => {
             Menú semanal
           </Typography>
 
-          {dieta.menuSemanal.length === 0 ? (
+          {!Array.isArray(dieta.menuSemanal) ||
+          dieta.menuSemanal.length === 0 ? (
             <Typography variant="body2">Sin comidas registradas.</Typography>
           ) : (
             dieta.menuSemanal.map((menu) => (
               <Box key={menu.dia} mt={1}>
                 <Typography variant="subtitle1">{menu.dia}</Typography>
                 <List dense disablePadding>
-                  {menu.comidas.length === 0 ? (
+                  {!Array.isArray(menu.comidas) || menu.comidas.length === 0 ? (
                     <ListItem>
                       <ListItemText primary="(Sin comidas)" />
                     </ListItem>

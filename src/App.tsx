@@ -42,6 +42,7 @@ import NotFound from "./components/FuncionalComponents/NotFound";
 import { DietProvider } from "./contexts/Diet.Context";
 import HomeDiet from "./controllers/Diet/HomeDietas";
 import TodasLasDietas from "./controllers/Diet/TodasDietas";
+import WsListener from "./controllers/Diet/WsListener";
 
 /**
  * `AppClient`
@@ -77,7 +78,15 @@ const AppClient = () => {
 
                 {/* ✅ Rutas protegidas */}
                 <Route element={<ProtectedRoute />}>
-                  <Route path={PATHS.HOME} element={<HomeDiet />} />
+                  <Route
+                    path={PATHS.HOME}
+                    element={
+                      <>
+                        <WsListener />
+                        <HomeDiet />
+                      </>
+                    }
+                  />
                   <Route path={PATHS.ALL_DIET} element={<TodasLasDietas />} />
                 </Route>
 
