@@ -39,9 +39,9 @@ export const DietProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const crearDieta = async (data: Omit<Diet, "_id">) => {
-    const nueva = await dietAdapter.crear(data);
-    setDietas((prev) => (prev ? [...prev, nueva] : [nueva]));
-    console.log(dietas);
+    await dietAdapter.crear(data);
+    //setDietas((prev) => (prev ? [...prev, nueva] : [nueva]));
+    fetchDietas();
   };
 
   const actualizarDieta = async (id: string, data: Partial<Diet>) => {
